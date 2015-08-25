@@ -8,6 +8,7 @@ class Computer
 
   def initialize(symbol)
     @symbol = symbol
+    symbol == "X" ? @opponent = "O" : @opponent = "X"
   end
 
   def move(board)

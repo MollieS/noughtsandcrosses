@@ -21,6 +21,7 @@ describe Board do
   context '#turns' do
     it 'should switch turns after each move' do
       board.place_mark(0)
+      board.switch_turn
       board.place_mark(1)
       expect(board.grid).to include("X", "O")
     end
