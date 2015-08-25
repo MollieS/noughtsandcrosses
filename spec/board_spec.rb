@@ -55,6 +55,34 @@ describe Board do
         expect(board.winning_rows).to eq(board.rows + board.columns + board.diagonals)
       end
     end
+
+    context '#available_spaces' do
+      it 'should return all free spaces' do
+        expect(board.available_spaces).to eq((0..8).to_a)
+      end
+    end
+
+    context '#game_over?' do
+      it 'should know if game is over' do
+        won_game
+        expect(board.game_over?).to be true
+      end
+    end
+
+    context '#clear_space' do
+      it 'should empty the tile' do
+        board.place_mark(5)
+        board.clear_space(5)
+        expect(board.grid).to eq (0..8).to_a
+      end
+    end
+
+    context '#valid_move' do
+      it 'should return false for an invalid move' do
+        board.place_mark(5)
+        expect(board.place_mark(5)).to be false
+      end
+    end
   end
 
   def won_game

@@ -10,8 +10,13 @@ class Board
   end
 
   def place_mark(location)
+    return false unless valid_move(location)
     @grid[location] = @current_player.symbol 
     switch_turn
+  end
+
+  def valid_move(location)
+    !taken?(@grid[location])
   end
 
   def tie?
@@ -43,7 +48,17 @@ class Board
     rows + columns + diagonals
   end
 
+  def available_spaces
+    @grid.select { |space| !taken?(space) }
+  end
 
+  def game_over?
+    full? || won_by?(@player.symbol) || won_by?(@opponent.symbol)
+  end
+
+  def clear_space(location)
+    @grid[location] = location
+  end
   private
 
   def full?
