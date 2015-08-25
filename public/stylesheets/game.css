@@ -1,0 +1,65 @@
+.top-right-corner {
+  border-style: none none solid solid;
+}
+
+.top-edge {
+  border-style: none solid solid solid;
+}
+
+.top-left-corner {
+  border-style: none solid solid none;
+}
+
+.left-edge {
+  border-style: solid solid solid none;
+}
+
+.centre {
+  border-style: solid;
+}
+
+.right-edge {
+  border-style: solid none solid solid;
+}
+
+.bottom-left-corner {
+  border-style: solid solid none none;
+}
+
+.bottom-edge {
+  border-style: solid solid none solid;
+}
+
+.bottom-right-corner {
+  border-style: solid none none solid;
+}
+
+.row {
+  padding: 0px;
+}
+
+#board {
+  height: 70%;
+  width: 50%;
+  border-collapse: collapse;
+}
+
+td {
+  padding: 0;
+  margin: 0;
+}
+
+.butn {
+  width: 100%;
+  height: 100%;
+  font-size: 70px;
+  display: block;
+  margin: auto;
+  -webkit-appearance: none;
+  background-color: white;
+  border: none;
+}
+
+form {
+  padding: 0px;
+}

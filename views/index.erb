@@ -1,0 +1,15 @@
+<html>
+  <h1>Noughts and Crosses</h1>
+  <form action='/game/new' method='post'>
+    <h3>Who is playing?</h3>
+    <input type='radio' name='players' value='two_humans' id='two_humans'>Human v Human
+    <input type='radio' name='players' value-'computer_v_human' id='computer_v_human'>Human v Computer
+    <h3>Choose your symbol:</h3>
+    <input type='radio' name='symbol' value='X' id='X'>X
+    <input type='radio' name='symbol' value='O' id='O'>O
+    <h3>Who goes first?</h3>
+    <input type='radio' name='first_player' value='player1' id='player1'>You
+    <input type='radio' name='first_player' value='player2' id='player2'>Your opponent
+    <input type='submit' value='submit'>
+  </form>
+</html>

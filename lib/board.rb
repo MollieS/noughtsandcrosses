@@ -1,6 +1,6 @@
 class Board
  
-  attr_reader :grid
+  attr_reader :grid, :player, :opponent, :current_player
 
   def initialize(player, opponent)
    @grid = (0..8).to_a 
@@ -9,10 +9,13 @@ class Board
    @current_player = player
   end
 
+  def switch_turn
+    @current_player == @player? @current_player = @opponent : @current_player = @player
+  end
+
   def place_mark(location)
     return false unless valid_move(location)
     @grid[location] = @current_player.symbol 
-    switch_turn
   end
 
   def valid_move(location)
@@ -69,9 +72,7 @@ class Board
     tile == @player.symbol || tile == @opponent.symbol
   end
 
-  def switch_turn
-    @current_player == @player? @current_player = @opponent : @current_player = @player
-  end
+  
 
   def left_diag
     left = []

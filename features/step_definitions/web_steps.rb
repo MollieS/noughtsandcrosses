@@ -20,6 +20,21 @@ Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
+Given(/^I have set up a game$/) do
+  visit('/')
+  choose('two_humans')
+  choose('X')
+  choose('player1')
+  click_button('submit')
+end
+Given(/^I have set up a game against a computer$/) do
+  visit('/')
+  choose('computer_v_human')
+  choose('X')
+  choose('player2')
+  click_button('submit')
+end
+
 When /^(?:|I )go to (.+)$/ do |page_name|
   visit path_to(page_name)
 end
