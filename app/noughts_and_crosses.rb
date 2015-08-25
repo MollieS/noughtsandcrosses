@@ -45,6 +45,10 @@ class NoughtsAndCrosses < Sinatra::Base
     redirect('/play')
   end
 
+  post '/play/new' do
+    session[:game] = Board.new(session[:game].player, session[:game].opponent)
+    redirect('/play')
+  end
   def first_go?
     @board.grid == (0..8).to_a
   end
