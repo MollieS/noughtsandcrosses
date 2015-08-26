@@ -4,11 +4,10 @@ require_relative '../lib/board.rb'
 require_relative '../lib/computer.rb'
 
 class NoughtsAndCrosses < Sinatra::Base
-
   enable :sessions
 
-  set :views, Proc.new { File.join(root, '..', 'views') }
-  set :public_dir, Proc.new { File.join(root, '..', 'public') }
+  set :views, proc { File.join(root, '..', 'views') }
+  set :public_dir, proc { File.join(root, '..', 'public') }
 
   get '/' do
     erb :index
@@ -17,7 +16,7 @@ class NoughtsAndCrosses < Sinatra::Base
   post '/game/new' do
     p params
     player = Player.new(params[:symbol])
-    params[:first_player] == "player1" ? session[:game] = Board.new(player, set_opponent) : session[:game] = Board.new(set_opponent, player)
+    params[:first_player] == 'player1' ? session[:game] = Board.new(player, set_opponent) : session[:game] = Board.new(set_opponent, player)
     p set_opponent
     redirect('/play')
   end
@@ -54,13 +53,13 @@ class NoughtsAndCrosses < Sinatra::Base
   end
 
   def opponent_symbol
-    params[:symbol] == "X" ? opponent_symbol = "O" : opponent_symbol = "X"
+    params[:symbol] == 'X' ? opponent_symbol = 'O' : opponent_symbol = 'X'
   end
 
   def set_opponent
-    params[:players] == "two_humans" ? Player.new(opponent_symbol) : Computer.new(opponent_symbol)
+    params[:players] == 'two_humans' ? Player.new(opponent_symbol) : Computer.new(opponent_symbol)
   end
 
   # start the server if ruby file executed directly
-  run! if app_file == $0
+  run! if app_file == $PROGRAM_NAME
 end

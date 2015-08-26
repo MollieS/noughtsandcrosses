@@ -1,7 +1,7 @@
 feature 'two humans playing a game' do
   scenario 'a tie' do
-    player = Player.new("X")
-    opponent = Player.new("O")
+    player = Player.new('X')
+    opponent = Player.new('O')
     board = Board.new(player, opponent)
     board.place_mark(0)
     board.switch_turn
@@ -25,8 +25,8 @@ feature 'two humans playing a game' do
   end
 
   scenario 'with a winner' do
-    player = Player.new("X")
-    opponent = Player.new("O")
+    player = Player.new('X')
+    opponent = Player.new('O')
     board = Board.new(player, opponent)
     board.place_mark(0)
     board.switch_turn
@@ -38,7 +38,7 @@ feature 'two humans playing a game' do
     board.switch_turn
     board.place_mark(2)
     expect(board.won_by?(player.symbol)).to be true
-    expect(board.winner).to eq("X")
-    expect(board.grid).to eq(["X", "X", "X", "O", "O", 5, 6, 7, 8])
+    expect(board.winner).to eq('X')
+    expect(board.grid).to eq(['X', 'X', 'X', 'O', 'O', 5, 6, 7, 8])
   end
 end

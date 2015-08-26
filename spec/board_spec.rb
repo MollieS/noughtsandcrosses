@@ -1,14 +1,14 @@
 require 'board'
 
 describe Board do
-  let(:player) { double :player, symbol: "X" }
-  let(:opponent) { double :opponent, symbol: "O" }
+  let(:player) { double :player, symbol: 'X' }
+  let(:opponent) { double :opponent, symbol: 'O' }
   let(:board) { Board.new(player, opponent) }
 
   context '#place_mark' do
     it 'should put the current_players mark on the board' do
       board.place_mark(0)
-      expect(board.grid).to include("X")
+      expect(board.grid).to include('X')
     end
   end
 
@@ -23,14 +23,14 @@ describe Board do
       board.place_mark(0)
       board.switch_turn
       board.place_mark(1)
-      expect(board.grid).to include("X", "O")
+      expect(board.grid).to include('X', 'O')
     end
   end
 
   context '#won_by?' do
     it 'should know when someone has won' do
       won_game
-      expect(board.won_by?("X")).to be true
+      expect(board.won_by?('X')).to be true
     end
   end
 
@@ -90,5 +90,3 @@ describe Board do
     (0..7).each { |num| board.place_mark(num) }
   end
 end
-
-

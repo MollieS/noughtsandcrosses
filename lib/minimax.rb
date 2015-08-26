@@ -2,14 +2,12 @@ module Minimax
   def best_space(board, depth = 0, scores = {})
     return score(board) if board.game_over?
     board.available_spaces.each do |m|
-      board.place_mark(m)
-      board.switch_turn
+      make_mark(board, m)
       scores[m] = best_space(board, depth += 1, {})
-      board.clear_space(m)
-      board.switch_turn
+      clear_board(board, m)
     end
-    return defense_move(scores) if depth == board.available_spaces.length
-    board.current_player.symbol == @symbol ? best_move(scores) : defend(scores)
+    return best_move(scores) if depth == board.available_spaces.length
+    board.current_player.symbol == @symbol ? best_score(scores) : alternate_score(scores)
   end
 
   def score(board)
@@ -18,16 +16,25 @@ module Minimax
     return 0 if board.tie?
   end
 
-  def defense_move(scores)
-    return scores.max_by { |move, result| result}[0]
+  def make_mark(board, move)
+    board.place_mark(move)
+    board.switch_turn
+  end
+
+  def clear_board(board, move)
+    board.clear_space(move)
+    board.switch_turn
   end
 
   def best_move(scores)
-    scores.max_by { |move, result| result }[1]
+    scores.max_by { |_move, result| result }[0]
   end
 
-  def defend(scores)
-    scores.min_by { |move, result| result }[1]
+  def best_score(scores)
+    scores.max_by { |_move, result| result }[1]
   end
 
+  def alternate_score(scores)
+    scores.min_by { |_move, result| result }[1]
+  end
 end

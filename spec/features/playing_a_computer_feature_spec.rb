@@ -1,7 +1,7 @@
 feature 'playing a computer' do
   scenario 'when a the human goes first' do
-    player = Player.new("X")
-    opponent = Computer.new("O")
+    player = Player.new('X')
+    opponent = Computer.new('O')
     board = Board.new(player, opponent)
     board.place_mark(4)
     board.switch_turn

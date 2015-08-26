@@ -1,11 +1,11 @@
 require 'computer'
 
 describe Computer do
-  let(:computer) { Computer.new("O") }
+  let(:computer) { Computer.new('O') }
 
   context '#symbol' do
     it 'should show the symbol' do
-      expect(computer.symbol).to eq "O"
+      expect(computer.symbol).to eq 'O'
     end
   end
 end

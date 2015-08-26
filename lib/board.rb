@@ -1,21 +1,20 @@
 class Board
- 
   attr_reader :grid, :player, :opponent, :current_player
 
   def initialize(player, opponent)
-   @grid = (0..8).to_a 
-   @player = player
-   @opponent = opponent
-   @current_player = player
+    @grid = (0..8).to_a
+    @player = player
+    @opponent = opponent
+    @current_player = player
   end
 
   def switch_turn
-    @current_player == @player? @current_player = @opponent : @current_player = @player
+    @current_player == @player ? @current_player = @opponent : @current_player = @player
   end
 
   def place_mark(location)
     return false unless valid_move(location)
-    @grid[location] = @current_player.symbol 
+    @grid[location] = @current_player.symbol
   end
 
   def valid_move(location)
@@ -23,7 +22,7 @@ class Board
   end
 
   def tie?
-    full?
+    full? && !won_by?(@player.symbol) && !won_by?(@opponent.symbol)
   end
 
   def won_by?(symbol)
@@ -31,8 +30,8 @@ class Board
   end
 
   def winner
-    return "X" if won_by?("X")
-    return "O" if won_by?("O")
+    return 'X' if won_by?('X')
+    return 'O' if won_by?('O')
   end
 
   def rows
@@ -62,6 +61,7 @@ class Board
   def clear_space(location)
     @grid[location] = location
   end
+
   private
 
   def full?
@@ -71,8 +71,6 @@ class Board
   def taken?(tile)
     tile == @player.symbol || tile == @opponent.symbol
   end
-
-  
 
   def left_diag
     left = []
@@ -85,5 +83,4 @@ class Board
     rows.reverse.each_with_index { |row, index| right << row[index] }
     right
   end
-
 end
