@@ -13,9 +13,9 @@ module Minimax
   end
 
   def score(board)
+    return -10 if board.won_by?(@opponent)
     return 10 if board.won_by?(@symbol)
     return 0 if board.tie?
-    return -10 if board.won_by?(@opponent)
   end
 
   def defense_move(scores)
