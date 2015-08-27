@@ -104,6 +104,10 @@ When /^(?:|I )uncheck "([^\"]*)"(?: within "([^\"]*)")?$/ do |field, selector|
   end
 end
 
+Given(/^I press "([^"]*)" (\d+) times$/) do |button, num|
+  8.times { click_button(button) }
+end
+
 When /^(?:|I )choose "([^\"]*)"(?: within "([^\"]*)")?$/ do |field, selector|
   with_scope(selector) do
     choose(field)
@@ -136,6 +140,16 @@ end
 Then(/^I should see "([^"]*)" in the top left corner$/) do |mark|
   board = find('/html/body/table/td[1]/form/input[2]').value
   board.should == mark
+end
+
+Then(/^I should see "([^"]*)" in the centre of the board$/) do |mark|
+  centre = find('td.centre').value
+  centre == mark
+end
+
+Then(/^I should see the button "([^"]*)"$/) do |text|
+  button = find('input.computer').value
+  button.should == text 
 end
 
 Then /^(?:|I )should see \/([^\/]*)\/(?: within "([^\"]*)")?$/ do |regexp, selector|

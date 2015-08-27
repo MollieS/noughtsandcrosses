@@ -9,6 +9,12 @@
   <% unless @board.game_over? %>
     <h3> <%= @board.current_player.symbol %> to play </h3>
   <% end %>
+  <% if @board.opponent.class == Computer && @board.opponent.class == Computer && !@board.game_over? %>
+    <form action='/board/update' method='post'>
+      <input type='hidden' value='play' name='game'>
+      <input type='submit' value='show next moves' class='computer'>
+    </form>
+  <% end %>
   <button><a href='/'>new game</a></button>
   <form action='/play/new' method='post'>
     <input type="hidden" value="play_again">

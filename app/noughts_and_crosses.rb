@@ -22,6 +22,7 @@ class NoughtsAndCrosses < Sinatra::Base
   post '/game/new' do
     session[:game] = two_player_game if params[:players] == 'two_humans'
     session[:game] = human_computer_game if params[:players] == 'on'
+    session[:game] = computer_v_computer_game if params[:players] == 'computer_v_computer'
     redirect('/play')
   end
 
@@ -35,7 +36,7 @@ class NoughtsAndCrosses < Sinatra::Base
 
   post '/board/update' do
     @board = session[:game]
-    make_move
+    make_move if @board.current_player.class == Player
     computer_move if @board.current_player.class == Computer
     reset_board
     redirect('/play')

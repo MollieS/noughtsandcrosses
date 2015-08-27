@@ -25,4 +25,4 @@ Feature: Starting a game
     And I choose "X"
     And I choose "player1"
     When I press "submit"
-    Then I should see "start the game"
+    Then I should see the button "show next moves"
