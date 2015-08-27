@@ -25,6 +25,13 @@ describe Board do
       board.place_mark(1)
       expect(board.grid).to include('X', 'O')
     end
+
+    it 'should keep switching turns' do
+      board.switch_turn
+      board.switch_turn
+      board.switch_turn
+      expect(board.current_player.symbol).to eq('O')
+    end
   end
 
   context '#won_by?' do
