@@ -82,6 +82,10 @@ When /^(?:|I )fill in the following(?: within "([^\"]*)")?:$/ do |selector, fiel
   end
 end
 
+Given(/^my opponent presses "([^"]*)"$/) do |location|
+  click_button(location)
+end
+
 When /^(?:|I )select "([^\"]*)" from "([^\"]*)"(?: within "([^\"]*)")?$/ do |value, field, selector|
   with_scope(selector) do
     select(value, from: field)
@@ -127,6 +131,11 @@ Then /^(?:|I )should see "([^\"]*)"(?: within "([^\"]*)")?$/ do |text, selector|
       assert page.has_content?(text)
     end
   end
+end
+
+Then(/^I should see "([^"]*)" in the top left corner$/) do |mark|
+  board = find('/html/body/table/td[1]/form/input[2]').value
+  board.should == mark
 end
 
 Then /^(?:|I )should see \/([^\/]*)\/(?: within "([^\"]*)")?$/ do |regexp, selector|

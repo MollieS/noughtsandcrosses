@@ -9,9 +9,6 @@
   <% unless @board.game_over? %>
     <h3> <%= @board.current_player.symbol %> to play </h3>
   <% end %>
-  <% if @board.won_by?("X") || @board.won_by?("O") %>
-    <h3> Winner: <%=@board.winner %> </h3>
-  <% end %>
   <button><a href='/'>new game</a></button>
   <form action='/play/new' method='post'>
     <input type="hidden" value="play_again">
