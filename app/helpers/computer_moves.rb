@@ -12,5 +12,4 @@ module ComputerMoves
   def reset_board
     session[:game] = @board
   end
-
 end

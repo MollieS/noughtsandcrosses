@@ -20,7 +20,6 @@ module Setup
   end
 
   def computer_v_computer_game
-    params[:first_player] == 'player1' ? Board.new(Computer.new(params[:symbol]), Computer.new(opponent_symbol)) : Board.new(Computer.new(opponent_symbol), Computer.new(params[:symbol])) 
+    params[:first_player] == 'player1' ? Board.new(Computer.new(params[:symbol]), Computer.new(opponent_symbol)) : Board.new(Computer.new(opponent_symbol), Computer.new(params[:symbol]))
   end
-
 end

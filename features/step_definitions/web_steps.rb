@@ -104,7 +104,7 @@ When /^(?:|I )uncheck "([^\"]*)"(?: within "([^\"]*)")?$/ do |field, selector|
   end
 end
 
-Given(/^I press "([^"]*)" (\d+) times$/) do |button, num|
+Given(/^I press "([^"]*)" (\d+) times$/) do |button, _num|
   8.times { click_button(button) }
 end
 
@@ -149,7 +149,7 @@ end
 
 Then(/^I should see the button "([^"]*)"$/) do |text|
   button = find('input.computer').value
-  button.should == text 
+  button.should == text
 end
 
 Then /^(?:|I )should see \/([^\/]*)\/(?: within "([^\"]*)")?$/ do |regexp, selector|
