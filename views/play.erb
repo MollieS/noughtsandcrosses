@@ -4,8 +4,8 @@
   </head>
   <body>
   <h1>Play</h1>
-  <h3> Player 1: <%=@board.player.symbol %></h3>
-  <h3> Player 2: <%=@board.opponent.symbol %></h3>
+  <h3 class='info'> Player 1: <%=@board.player.symbol %></h3>
+  <h3 class='info'> Player 2: <%=@board.opponent.symbol %></h3>
   <% unless @board.game_over? %>
     <h3> <%= @board.current_player.symbol %> to play </h3>
   <% end %>
@@ -15,8 +15,8 @@
       <input type='submit' value='show next moves' class='computer'>
     </form>
   <% end %>
-  <button><a href='/'>new game</a></button>
-  <form action='/play/new' method='post'>
+  <a href='/'><button class='nav'><a href='/'>new game</a></button>
+  <form action='/play/new' method='post' class='nav'>
     <input type="hidden" value="play_again">
     <input type="submit" value="play again">
   </form>

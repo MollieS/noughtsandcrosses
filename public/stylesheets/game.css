@@ -42,8 +42,12 @@
   height: 70%;
   width: 50%;
   border-collapse: collapse;
+  margin: auto;
 }
 
+.info {
+  display: inline-block;
+}
 td {
   padding: 0;
   margin: 0;
