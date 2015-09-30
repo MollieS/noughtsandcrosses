@@ -3,23 +3,23 @@ feature 'playing a computer' do
     player = Player.new('X')
     opponent = Computer.new('O')
     board = Board.new(player, opponent)
-    board.place_mark(4)
+    board.place_mark(5)
     board.switch_turn
     board.place_mark(opponent.move(board))
     board.switch_turn
-    board.place_mark(8)
+    board.place_mark(9)
     board.switch_turn
     board.place_mark(opponent.move(board))
     board.switch_turn
-    board.place_mark(1)
+    board.place_mark(2)
+    board.switch_turn
+    board.place_mark(opponent.move(board))
+    board.switch_turn
+    board.place_mark(7)
     board.switch_turn
     board.place_mark(opponent.move(board))
     board.switch_turn
     board.place_mark(6)
-    board.switch_turn
-    board.place_mark(opponent.move(board))
-    board.switch_turn
-    board.place_mark(5)
     expect(board.grid).to eq %w(O X O O X X X O X)
   end
 
@@ -29,15 +29,15 @@ feature 'playing a computer' do
     board = Board.new(opponent, player)
     board.place_mark(opponent.move(board))
     board.switch_turn
-    board.place_mark(2)
+    board.place_mark(3)
+    board.switch_turn
+    board.place_mark(opponent.move(board))
+    board.switch_turn
+    board.place_mark(7)
     board.switch_turn
     board.place_mark(opponent.move(board))
     board.switch_turn
     board.place_mark(6)
-    board.switch_turn
-    board.place_mark(opponent.move(board))
-    board.switch_turn
-    board.place_mark(5)
     board.switch_turn
     board.place_mark(opponent.move(board))
     expect(board.won_by?('O')).to be true

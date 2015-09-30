@@ -7,14 +7,14 @@ describe Board do
 
   context '#place_mark' do
     it 'should put the current_players mark on the board' do
-      board.place_mark(0)
+      board.place_mark(1)
       expect(board.grid).to include('X')
     end
   end
 
   context '#grid' do
     it 'should initialize with an empty grid' do
-      expect(board.grid).to eq((0..8).to_a)
+      expect(board).to be_clear
     end
   end
 
@@ -43,20 +43,21 @@ describe Board do
 
   context '#rows' do
     it 'should show the rows' do
-      expect(board.rows).to eq([[0, 1, 2], [3, 4, 5], [6, 7, 8]])
+      expect(board.rows).to eq([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
     end
   end
 
   context '#columns' do
     it 'should show the columns' do
-      expect(board.columns).to eq([[0, 3, 6], [1, 4, 7], [2, 5, 8]])
+      expect(board.columns).to eq([[1, 4, 7], [2, 5, 8], [3, 6, 9]])
     end
   end
 
   context '#get_diagonals' do
     it 'should show the diagonals' do
-      expect(board.diagonals).to eq([[0, 4, 8], [6, 4, 2]])
+      expect(board.diagonals).to eq([[1, 5, 9], [7, 5, 3]])
     end
+  end
 
     context '#winning_rows' do
       it 'should show all winning positions' do
@@ -66,7 +67,7 @@ describe Board do
 
     context '#available_spaces' do
       it 'should return all free spaces' do
-        expect(board.available_spaces).to eq((0..8).to_a)
+        expect(board.available_spaces).to eq((1..9).to_a)
       end
     end
 
@@ -81,7 +82,7 @@ describe Board do
       it 'should empty the tile' do
         board.place_mark(5)
         board.clear_space(5)
-        expect(board.grid).to eq (0..8).to_a
+        expect(board).to be_clear
       end
     end
 
@@ -91,9 +92,8 @@ describe Board do
         expect(board.place_mark(5)).to be false
       end
     end
-  end
 
   def won_game
-    (0..7).each { |num| board.place_mark(num) }
+    (1..8).each { |num| board.place_mark(num) }
   end
 end

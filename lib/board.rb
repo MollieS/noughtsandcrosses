@@ -1,8 +1,9 @@
 class Board
-  attr_reader :grid, :player, :opponent, :current_player
+  attr_reader :player, :opponent, :current_player
+  attr_accessor :grid
 
   def initialize(player, opponent)
-    @grid = (0..8).to_a
+    @grid = (1..9).to_a
     @player = player
     @opponent = opponent
     @current_player = player
@@ -14,11 +15,11 @@ class Board
 
   def place_mark(location)
     return false unless valid_move(location)
-    @grid[location] = @current_player.symbol
+    @grid[location - 1] = @current_player.symbol
   end
 
   def valid_move(location)
-    !taken?(@grid[location])
+    !taken?(@grid[location - 1])
   end
 
   def tie?
@@ -59,7 +60,11 @@ class Board
   end
 
   def clear_space(location)
-    @grid[location] = location
+    @grid[location - 1] = location
+  end
+  
+  def clear?
+    @grid.all? { |tile| !taken?(tile) }
   end
 
   private
