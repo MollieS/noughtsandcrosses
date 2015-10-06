@@ -33,9 +33,24 @@ describe Game do
       expect(game.current_player.symbol).to eq "O"
     end
 
-    it 'knows the result' do
+    it 'knows when the game is tied' do
       tie_game
       expect(game.result).to eq "tie"
+    end
+
+    it 'knows when the game is won' do
+      won_game
+      expect(game.result).to eq "won"
+    end
+
+    it 'knows when the game is over' do
+      won_game
+      expect(game.over?).to be true
+    end
+
+    it 'knows the winner' do
+      won_game
+      expect(game.winner).to eq player
     end
   end
 
@@ -50,5 +65,14 @@ describe Game do
     game.play(6)
     game.play(9)
     game.play(7)
+  end
+
+  def won_game
+    game.first_player = player
+    game.play(1)
+    game.play(4)
+    game.play(2)
+    game.play(5)
+    game.play(3)
   end
 end

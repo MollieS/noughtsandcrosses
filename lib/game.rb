@@ -31,5 +31,14 @@ class Game
 
   def result
     return 'tie' if @board.tie?
+    return 'won' if @board.won_by?("X") || @board.won_by?("O")
+  end
+
+  def winner
+    @board.won_by?(@player.symbol) ? @player : @opponent
+  end
+
+  def over?
+    result != nil
   end
 end
