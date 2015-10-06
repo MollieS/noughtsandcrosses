@@ -2,7 +2,7 @@ feature 'two humans playing a game' do
   scenario 'a tie' do
     player = Player.new('X')
     opponent = Player.new('O')
-    board = Board.new(player, opponent)
+    board = Board.new
     game = Game.new(player, opponent, board)
     game.first_player = player
     game.play(1)
@@ -21,7 +21,7 @@ feature 'two humans playing a game' do
   scenario 'with a winner' do
     player = Player.new('X')
     opponent = Player.new('O')
-    board = Board.new(player, opponent)
+    board = Board.new
     game = Game.new(player, opponent, board)
     game.first_player = player
     game.play(1)

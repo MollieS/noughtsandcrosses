@@ -2,17 +2,9 @@ class Board
   attr_reader :player, :opponent, :current_player
   attr_accessor :grid
 
-  def initialize(player, opponent)
+  def initialize
     @grid = (1..9).to_a
-    @player = player
-    @opponent = opponent
-    @current_player = player
   end
-
-  def switch_turn
-    @current_player == @player ? @current_player = @opponent : @current_player = @player
-  end
-
   def place_mark(location, symbol)
     return false unless valid_move(location)
     @grid[location - 1] = symbol
@@ -23,7 +15,7 @@ class Board
   end
 
   def tie?
-    full? && !won_by?(@player.symbol) && !won_by?(@opponent.symbol)
+    full? && !won_by?("X") && !won_by?("O")
   end
 
   def won_by?(symbol)
@@ -55,10 +47,6 @@ class Board
     @grid.select { |space| !taken?(space) }
   end
 
-  def game_over?
-    full? || won_by?(@player.symbol) || won_by?(@opponent.symbol)
-  end
-
   def clear_space(location)
     @grid[location - 1] = location
   end
@@ -74,7 +62,7 @@ class Board
   end
 
   def taken?(tile)
-    tile == @player.symbol || tile == @opponent.symbol
+    tile == "X" || tile == "O"
   end
 
   def left_diag

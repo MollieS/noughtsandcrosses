@@ -5,7 +5,7 @@ require 'board'
 describe Game do
   let(:player) { instance_double Player, symbol: "X" }
   let(:opponent) { instance_double Player, symbol: "O" }
-  let(:board) { Board.new(player, opponent) }
+  let(:board) { Board.new }
   let(:game) { Game.new(player, opponent, board) }
 
   context 'setup' do

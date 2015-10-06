@@ -21,7 +21,7 @@ class Game
   end
 
   def play(location)
-    @board.place_mark(location, current_player.symbol)
+    @board.place_mark(location, @current_player.symbol)
     switch_turn
   end
 
