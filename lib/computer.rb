@@ -1,5 +1,4 @@
 class Computer
-
   attr_reader :symbol
 
   def initialize(symbol)
@@ -11,7 +10,7 @@ class Computer
     best_space(board)
   end
 
- private 
+  private
 
   def best_space(board, depth = 0, scores = {})
     return score(board) if board.game_over?
@@ -51,5 +50,4 @@ class Computer
   def alternate_score(scores)
     scores.min_by { |_move, result| result }[1]
   end
-
 end

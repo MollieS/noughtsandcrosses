@@ -62,7 +62,7 @@ class Board
   def clear_space(location)
     @grid[location - 1] = location
   end
-  
+
   def clear?
     @grid.all? { |tile| !taken?(tile) }
   end

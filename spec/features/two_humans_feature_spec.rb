@@ -3,24 +3,18 @@ feature 'two humans playing a game' do
     player = Player.new('X')
     opponent = Player.new('O')
     board = Board.new(player, opponent)
-    board.place_mark(1)
-    board.switch_turn
-    board.place_mark(2)
-    board.switch_turn
-    board.place_mark(3)
-    board.switch_turn
-    board.place_mark(5)
-    board.switch_turn
-    board.place_mark(8)
-    board.switch_turn
-    board.place_mark(4)
-    board.switch_turn
-    board.place_mark(6)
-    board.switch_turn
-    board.place_mark(9)
-    board.switch_turn
-    board.place_mark(7)
-    expect(board.tie?).to be true
+    game = Game.new(player, opponent, board)
+    game.first_player = player
+    game.play(1)
+    game.play(2)
+    game.play(3)
+    game.play(5)
+    game.play(8)
+    game.play(4)
+    game.play(6)
+    game.play(9)
+    game.play(7)
+    expect(board.result).to eg 'tie'
     expect(board.grid).to eq %w(X O X O O X X X O)
   end
 

@@ -1,5 +1,5 @@
 feature 'playing a computer' do
-  scenario 'when a the human goes first' do
+  xscenario 'when a the human goes first' do
     player = Player.new('X')
     opponent = Computer.new('O')
     board = Board.new(player, opponent)
@@ -23,7 +23,7 @@ feature 'playing a computer' do
     expect(board.grid).to eq %w(O X O O X X X O X)
   end
 
-  scenario 'when a computer goes first' do
+  xscenario 'when a computer goes first' do
     player = Player.new('X')
     opponent = Computer.new('O')
     board = Board.new(opponent, player)
