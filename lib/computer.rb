@@ -15,9 +15,9 @@ class Computer
   def best_space(game, depth = 0, scores = {})
     return score(game.board) if game.over?
     game.board.available_spaces.each do |m|
-      make_mark(game, m)
+      game.play(m)
       scores[m] = best_space(game, depth += 1, {})
-      clear_board(game, m)
+      clear_space(game, m)
     end
     return best_move(scores) if depth == game.board.available_spaces.length
     game.current_player.symbol == @symbol ? best_score(scores) : alternate_score(scores)
@@ -29,12 +29,7 @@ class Computer
     return 0 if board.tie?
   end
 
-  def make_mark(game, move)
-    game.board.place_mark(move, game.current_player.symbol)
-    game.switch_turn
-  end
-
-  def clear_board(game, move)
+  def clear_space(game, move)
     game.board.clear_space(move)
     game.switch_turn
   end

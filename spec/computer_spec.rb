@@ -1,55 +1,44 @@
 require 'computer'
 require 'board'
+require 'player'
 
 describe Computer do
   let(:computer) { Computer.new('O') }
-  let(:player) { double :player, symbol: 'X' }
-  let(:board) { Board.new(computer, player) }
+  let(:player) { instance_double Player, symbol: 'X' }
+  let(:board) { Board.new }
+  let(:game) { Game.new(computer, player, board) }
 
   it 'shows the symbol' do
     expect(computer.symbol).to eq 'O'
   end
 
-  xit 'returns the only availible space for an almost full board' do
-    board.place_mark(computer.move(board))
-    board.switch_turn
-    board.place_mark(5)
-    board.switch_turn
-    board.place_mark(computer.move(board))
-    board.switch_turn
-    board.place_mark(3)
-    board.switch_turn
-    board.place_mark(computer.move(board))
-    board.switch_turn
-    board.place_mark(4)
-    board.switch_turn
-    board.place_mark(computer.move(board))
-    board.switch_turn
-    board.place_mark(8)
-    board.switch_turn
-    expect(computer.move(board)).to eq 9
+  it 'returns the only availible space for an almost full board' do
+    game.first_player = computer
+    game.play(computer.move(game))
+    game.play(5)
+    game.play(computer.move(game))
+    game.play(3)
+    game.play(computer.move(game))
+    game.play(4)
+    game.play(computer.move(game))
+    game.play(8)
+    expect(computer.move(game)).to eq 9
   end
 
-  xit 'blocks a player win' do
-    board = Board.new(player, computer)
-    board.place_mark(7)
-    board.switch_turn
-    board.place_mark(computer.move(board))
-    board.switch_turn
-    board.place_mark(8)
-    board.switch_turn
-    expect(computer.move(board)).to eq 9
+  it 'blocks a player win' do
+    game.first_player = player
+    game.play(7)
+    game.play(computer.move(game))
+    game.play(8)
+    expect(computer.move(game)).to eq 9
   end
 
-  xit 'goes for available win' do
-    board.place_mark(computer.move(board))
-    board.switch_turn
-    board.place_mark(7)
-    board.switch_turn
-    board.place_mark(computer.move(board))
-    board.switch_turn
-    board.place_mark(8)
-    board.switch_turn
-    expect(computer.move(board)).to eq 3
+  it 'goes for available win' do
+    game.first_player = computer
+    game.play(computer.move(game))
+    game.play(7)
+    game.play(computer.move(game))
+    game.play(8)
+    expect(computer.move(game)).to eq 3
   end
 end

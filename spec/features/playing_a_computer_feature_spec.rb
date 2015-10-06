@@ -17,23 +17,19 @@ feature 'playing a computer' do
     expect(board.grid).to eq %w(O X O O X X X O X)
   end
 
-  xscenario 'when a computer goes first' do
+  scenario 'when a computer goes first' do
     player = Player.new('X')
     opponent = Computer.new('O')
-    board = Board.new(opponent, player)
-    board.place_mark(opponent.move(board))
-    board.switch_turn
-    board.place_mark(3)
-    board.switch_turn
-    board.place_mark(opponent.move(board))
-    board.switch_turn
-    board.place_mark(7)
-    board.switch_turn
-    board.place_mark(opponent.move(board))
-    board.switch_turn
-    board.place_mark(6)
-    board.switch_turn
-    board.place_mark(opponent.move(board))
+    board = Board.new
+    game = Game.new(player, opponent, board)
+    game.first_player = opponent
+    game.play(opponent.move(game))
+    game.play(3)
+    game.play(opponent.move(game))
+    game.play(7)
+    game.play(opponent.move(game))
+    game.play(6)
+    game.play(opponent.move(game))
     expect(board.won_by?('O')).to be true
   end
 end
