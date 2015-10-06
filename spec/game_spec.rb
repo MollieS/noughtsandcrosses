@@ -26,5 +26,29 @@ describe Game do
       game.play(1)
       expect(board.grid[0]).to eq "X"
     end
+
+    it 'switches turns' do
+      game.first_player = player
+      game.play(1)
+      expect(game.current_player.symbol).to eq "O"
+    end
+
+    it 'knows the result' do
+      tie_game
+      expect(game.result).to eq "tie"
+    end
+  end
+
+  def tie_game
+    game.first_player = player
+    game.play(1)
+    game.play(2)
+    game.play(3)
+    game.play(5)
+    game.play(8)
+    game.play(4)
+    game.play(6)
+    game.play(9)
+    game.play(7)
   end
 end

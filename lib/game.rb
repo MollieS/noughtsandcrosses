@@ -3,6 +3,8 @@ class Game
 
   def initialize(player, opponent, board)
     @board = board
+    @player = player
+    @opponent = opponent
   end
 
   def first_player=player
@@ -20,5 +22,14 @@ class Game
 
   def play(location)
     @board.place_mark(location, current_player.symbol)
+    switch_turn
+  end
+
+  def switch_turn
+    @current_player == @player ? @current_player = @opponent : @current_player = @player
+  end
+
+  def result
+    return 'tie' if @board.tie?
   end
 end

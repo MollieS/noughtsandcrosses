@@ -28,27 +28,13 @@ describe Board do
   end
 
   context 'playing' do
-    it 'puts the current_players mark on the board' do
-      board.place_mark(1)
+    it 'puts a mark on the board' do
+      board.place_mark(1, "X")
       expect(board.grid[0]).to eq "X"
     end
 
     it 'initializes with an empty grid' do
       expect(board).to be_clear
-    end
-
-    it 'switchs turns after each move' do
-      board.place_mark(0)
-      board.switch_turn
-      board.place_mark(1)
-      expect(board.grid).to include('X', 'O')
-    end
-
-    it 'keeps switching turns' do
-      board.switch_turn
-      board.switch_turn
-      board.switch_turn
-      expect(board.current_player.symbol).to eq('O')
     end
 
     it 'knows when someone has won' do
@@ -62,18 +48,25 @@ describe Board do
     end
 
     it 'empties the tile' do
-      board.place_mark(5)
+      board.place_mark(5, "X")
       board.clear_space(5)
       expect(board).to be_clear
     end
 
     it 'returns false for an invalid move' do
-      board.place_mark(5)
-      expect(board.place_mark(5)).to be false
+      board.place_mark(5, "X")
+      expect(board.place_mark(5, "O")).to be false
     end
   end
 
   def won_game
-    (1..8).each { |num| board.place_mark(num) }
+    board.place_mark(1, "X")
+    board.place_mark(2, "O")
+    board.place_mark(3, "X")
+    board.place_mark(4, "O")
+    board.place_mark(5, "X")
+    board.place_mark(6, "O")
+    board.place_mark(7, "X")
+    board.place_mark(8, "O")
   end
 end

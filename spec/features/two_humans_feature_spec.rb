@@ -14,11 +14,11 @@ feature 'two humans playing a game' do
     game.play(6)
     game.play(9)
     game.play(7)
-    expect(board.result).to eg 'tie'
+    expect(game.result).to eq 'tie'
     expect(board.grid).to eq %w(X O X O O X X X O)
   end
 
-  scenario 'with a winner' do
+  xscenario 'with a winner' do
     player = Player.new('X')
     opponent = Player.new('O')
     board = Board.new(player, opponent)

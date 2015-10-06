@@ -13,9 +13,9 @@ class Board
     @current_player == @player ? @current_player = @opponent : @current_player = @player
   end
 
-  def place_mark(location)
+  def place_mark(location, symbol)
     return false unless valid_move(location)
-    @grid[location - 1] = @current_player.symbol
+    @grid[location - 1] = symbol
   end
 
   def valid_move(location)
