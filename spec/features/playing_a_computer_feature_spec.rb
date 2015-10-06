@@ -1,25 +1,19 @@
 feature 'playing a computer' do
-  xscenario 'when a the human goes first' do
+  scenario 'when a the human goes first' do
     player = Player.new('X')
     opponent = Computer.new('O')
-    board = Board.new(player, opponent)
-    board.place_mark(5)
-    board.switch_turn
-    board.place_mark(opponent.move(board))
-    board.switch_turn
-    board.place_mark(9)
-    board.switch_turn
-    board.place_mark(opponent.move(board))
-    board.switch_turn
-    board.place_mark(2)
-    board.switch_turn
-    board.place_mark(opponent.move(board))
-    board.switch_turn
-    board.place_mark(7)
-    board.switch_turn
-    board.place_mark(opponent.move(board))
-    board.switch_turn
-    board.place_mark(6)
+    board = Board.new
+    game = Game.new(player, opponent, board)
+    game.first_player = player
+    game.play(5)
+    game.play(opponent.move(game))
+    game.play(9)
+    game.play(opponent.move(game))
+    game.play(2)
+    game.play(opponent.move(game))
+    game.play(7)
+    game.play(opponent.move(game))
+    game.play(6)
     expect(board.grid).to eq %w(O X O O X X X O X)
   end
 
