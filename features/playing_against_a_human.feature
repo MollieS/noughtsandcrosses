@@ -5,29 +5,29 @@ Feature: Playing against a human
 
   Scenario: two humans
     Given I have set up a game
-    When I press "0"
+    When I press "1"
     Then I should see "X" in the top left corner 
 
   Scenario: winning a game against a human
     Given I have set up a game
-    And I press "2"
-    And my opponent presses "4"
-    And I press "6"
-    And my opponent presses "8"
-    And I press "0"
-    And my opponent presses "1"
     And I press "3"
+    And my opponent presses "5"
+    And I press "7"
+    And my opponent presses "9"
+    And I press "1"
+    And my opponent presses "2"
+    And I press "4"
     Then I should see "Winner: X"
 
   Scenario: a tied game
     Given I have set up a game
-    And I press "0"
-    And my opponent presses "4"
-    And I press "8"
-    And my opponent presses "1"
-    And I press "7"
-    And my opponent presses "6"
-    And I press "2"
+    And I press "1"
     And my opponent presses "5"
+    And I press "9"
+    And my opponent presses "2"
+    And I press "8"
+    And my opponent presses "7"
     And I press "3"
+    And my opponent presses "6"
+    And I press "4"
     Then I should see "It's a tie!"

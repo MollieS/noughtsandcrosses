@@ -4,82 +4,49 @@
   </head>
   <body>
   <h1>Play</h1>
-  <h3 class='info'> Player 1: <%=@board.player.symbol %></h3>
-  <h3 class='info'> Player 2: <%=@board.opponent.symbol %></h3>
-  <% unless @board.game_over? %>
-    <h3> <%= @board.current_player.symbol %> to play </h3>
-  <% end %>
-  <% if @board.opponent.class == Computer && @board.opponent.class == Computer && !@board.game_over? %>
-    <form action='/board/update' method='post'>
-      <input type='hidden' value='play' name='game'>
-      <input type='submit' value='show next moves' class='computer'>
-    </form>
+  <% unless @game.over? %>
+    <h3> <%= @game.current_player.symbol %> to play </h3>
   <% end %>
   <a href='/'><button class='nav'><a href='/'>new game</a></button>
   <form action='/play/new' method='post' class='nav'>
     <input type="hidden" value="play_again">
     <input type="submit" value="play again">
   </form>
-  <table id="board">
+  <form action='/board/update' method='post'>
+    <table id="board">
       <td class="top-left-corner">
-        <form action='/board/update' method='post'>
-          <input type="hidden" value="0" name="location">
-          <input type="submit" value=<%=@board.grid[0]%> class='butn'>
-        </form>
+        <input type="submit" value=<%=@game.board.grid[0]%> name='location' class='butn'/>
       </td>
       <td class="top-edge">
-        <form action='/board/update' method='post'>
-          <input type="hidden" value="1" name="location">
-          <input type="submit" value=<%=@board.grid[1] %> class='butn'>
-        </form>
+        <input type="submit" value=<%=@game.board.grid[1] %> name='location' class='butn'/>
       </td>
       <td class="top-right-corner">
-        <form action='/board/update' method='post'>
-          <input type="hidden" value="2" name="location">
-          <input type="submit" value=<%=@board.grid[2] %> class='butn'>
-        </form>
+          <input type="submit" value=<%=@game.board.grid[2] %> name='location' class='butn'/>
       </td>
     </tr>
     <tr class='row'>
       <td class='left-edge'>
-        <form action='/board/update' method='post'>
-          <input type="hidden" value="3" name="location">
-          <input type="submit" value=<%=@board.grid[3] %> class='butn'>
-        </form>
+        <input type="submit" value=<%=@game.board.grid[3] %> name='location' class='butn'/>
       </td>
       <td class='centre'>
-        <form action='/board/update' method='post'>
-          <input type="hidden" value="4" name="location">
-          <input type="submit" value=<%=@board.grid[4] %> class='butn'>
-        </form>
+        <input type="submit" value=<%=@game.board.grid[4] %> name='location' class='butn'/>
       </td>
       <td class='right-edge'>
-        <form action='/board/update' method='post'>
-          <input type="hidden" value="5" name="location">
-          <input type="submit" value=<%=@board.grid[5] %> class='butn'>
-        </form>
+        <input type="submit" value=<%=@game.board.grid[5] %> name='location' class='butn'/>
       </td>
     </tr>
     <tr class='row'>
       <td class='bottom-left-corner'>
-        <form action='/board/update' method='post'>
-          <input type="hidden" value="6" name="location">
-          <input type="submit" value=<%=@board.grid[6] %> class='butn'>
-        </form>
+        <input type="submit" value=<%=@game.board.grid[6] %> name='location' class='butn'/>
       </td>
       <td class='bottom-edge'>
-        <form action='/board/update' method='post'>
-          <input type="hidden" value="7" name="location">
-          <input type="submit" value=<%=@board.grid[7] %> class='butn'>
-        </form>
+        <input type="submit" value=<%=@game.board.grid[7] %> name='location' class='butn'/>
       </td>
       <td class='bottom-right-corner'>
-        <form action='/board/update' method='post'>
-          <input type="hidden" value="8" name="location">
-          <input type="submit" value=<%=@board.grid[8] %> class='butn'>
-        </form>
+        <input type="submit" value=<%=@game.board.grid[8] %> name='location' class='butn'/>
       </td>
     </tr>
   </table>
+</form>
   </body>
 </html>

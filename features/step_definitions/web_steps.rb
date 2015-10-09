@@ -138,8 +138,8 @@ Then /^(?:|I )should see "([^\"]*)"(?: within "([^\"]*)")?$/ do |text, selector|
 end
 
 Then(/^I should see "([^"]*)" in the top left corner$/) do |mark|
-  board = find('/html/body/table/td[1]/form/input[2]').value
-  board.should == mark
+  tile = find('td.top-left-corner').value
+  tile == mark
 end
 
 Then(/^I should see "([^"]*)" in the centre of the board$/) do |mark|

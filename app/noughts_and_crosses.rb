@@ -3,48 +3,52 @@ require 'sinatra/flash'
 require_relative '../lib/player.rb'
 require_relative '../lib/board.rb'
 require_relative '../lib/computer.rb'
-require_relative './helpers/computer_moves.rb'
-require_relative './helpers/playing_game.rb'
-require_relative './helpers/game_setup.rb'
+require_relative '../lib/game.rb'
 
 class NoughtsAndCrosses < Sinatra::Base
-  enable :sessions
   register Sinatra::Flash
-  helpers ComputerMoves, Playing, Setup
 
   set :views, proc { File.join(root, '..', 'views') }
   set :public_dir, proc { File.join(root, '..', 'public') }
+
+  games = {}
 
   get '/' do
     erb :index
   end
 
   post '/game/new' do
-    session[:game] = two_player_game if params[:players] == 'two_humans'
-    session[:game] = human_computer_game if params[:players] == 'on'
-    session[:game] = computer_v_computer_game if params[:players] == 'computer_v_computer'
+    p params
+    if params[:players] == 'two_humans'
+      player = Player.new(params[:symbol])
+      params[:symbol] == "X" ? opponent = Player.new("O") : opponent = Player.new("X")
+      game = Game.new(player, opponent, Board.new)
+      params[:first_player] == 'player1' ? game.first_player = player : game.first_player = opponent
+      games[:game] = game
+    elsif params[:players] == 'on'
+      player = Player.new(params[:symbol]) 
+      params[:symbol] == "X" ? opponent = Computer.new("O") : opponent = Computer.new("X")
+      game = Game.new(player, opponent, Board.new)
+      params[:first_player] == 'player1' ? game.first_player = player : game.first_player = opponent
+    end
     redirect('/play')
   end
 
   get '/play' do
-    @board = session[:game]
-    computer_move if computer_first?
-    flash.now[:notice] = "Winner: #{@board.winner}" if @board.won_by?(@board.opponent.symbol) || @board.won_by?(@board.player.symbol)
-    flash.now[:notice] = "It's a tie!" if @board.tie?
+    @game = games[:game]
+    flash.now[:notice] = "Winner: #{@game.winner.symbol}" if @game.winner
+    flash.now[:notice] = "It's a tie!" if @game.result == 'tie'
     erb :play
   end
 
   post '/board/update' do
-    @board = session[:game]
-    make_move if @board.current_player.class == Player
-    computer_move if @board.current_player.class == Computer
-    reset_board
+    @game = games[:game]
+    location =  params[:location]
+    @game.play(location.to_i)
     redirect('/play')
   end
 
   post '/play/new' do
-    session[:game] = Board.new(session[:game].player, session[:game].opponent)
-    redirect('/play')
   end
 
   # start the server if ruby file executed directly
