@@ -18,18 +18,16 @@ class NoughtsAndCrosses < Sinatra::Base
   end
 
   post '/game/new' do
-    p params
     if params[:players] == 'two_humans'
       player = Player.new(params[:symbol])
       params[:symbol] == "X" ? opponent = Player.new("O") : opponent = Player.new("X")
-      game = Game.new(player, opponent, Board.new)
-      params[:first_player] == 'player1' ? game.first_player = player : game.first_player = opponent
-      games[:game] = game
     elsif params[:players] == 'on'
       player = Player.new(params[:symbol]) 
       params[:symbol] == "X" ? opponent = Computer.new("O") : opponent = Computer.new("X")
+    end
       game = Game.new(player, opponent, Board.new)
       params[:first_player] == 'player1' ? game.first_player = player : game.first_player = opponent
+      games[:game] = game
     end
     redirect('/play')
   end
@@ -38,6 +36,7 @@ class NoughtsAndCrosses < Sinatra::Base
     @game = games[:game]
     flash.now[:notice] = "Winner: #{@game.winner.symbol}" if @game.winner
     flash.now[:notice] = "It's a tie!" if @game.result == 'tie'
+    flash.now[:notice] = "#{@game.current_player.symbol} to play" unless @game.over?
     erb :play
   end
 

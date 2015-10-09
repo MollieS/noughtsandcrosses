@@ -17,7 +17,7 @@ Feature: Starting a game
     And I choose "O"
     And I choose "player2"
     When I press "submit"
-    Then I should see "O to play"
+    Then I should see "X to play"
 
   Scenario: A computer playing a computer
     Given I am on the homepage
