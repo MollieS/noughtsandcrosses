@@ -15,9 +15,9 @@ Feature: Starting a game
     Given I am on the homepage
     And I choose "computer_v_human"
     And I choose "O"
-    And I choose "player2"
+    And I choose "player1"
     When I press "submit"
-    Then I should see "X to play"
+    Then I should see "O to play"
 
   Scenario: A computer playing a computer
     Given I am on the homepage

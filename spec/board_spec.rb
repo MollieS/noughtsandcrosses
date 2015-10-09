@@ -45,9 +45,13 @@ describe Board do
       expect(subject).to be_clear
     end
 
-    it 'returns false for an invalid move' do
+    it 'returns false for a taken space' do
       subject.place_mark(5, "X")
       expect(subject.place_mark(5, "O")).to be false
+    end
+
+    it 'returns false for a move out of bounds' do
+      expect(subject.place_mark(10, "X")).to be false
     end
   end
 

@@ -11,7 +11,7 @@ class Board
   end
 
   def valid_move(location)
-    !taken?(@grid[location - 1])
+    !taken?(@grid[location - 1]) && location < 10
   end
 
   def tie?

@@ -9,15 +9,15 @@ Feature: Playing agaist a computer
 
   Scenario: a tie
     Given I have set up a game against a computer
-    And I press "4"
-    And I press "2"
+    And I press "5"
     And I press "3"
+    And I press "4"
     And I press "8"
     Then I should see "It's a tie!"
 
   Scenario: when the computer wins
     Given I have set up a game against a computer
     And I press "2"
+    And I press "7"
     And I press "6"
-    And I press "5"
     Then I should see "Winner: O"

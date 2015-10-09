@@ -24,16 +24,19 @@ class NoughtsAndCrosses < Sinatra::Base
     elsif params[:players] == 'on'
       player = Player.new(params[:symbol]) 
       params[:symbol] == "X" ? opponent = Computer.new("O") : opponent = Computer.new("X")
+    else
+      player = Computer.new('X')
+      opponent = Computer.new('O')
     end
       game = Game.new(player, opponent, Board.new)
       params[:first_player] == 'player1' ? game.first_player = player : game.first_player = opponent
       games[:game] = game
-    end
     redirect('/play')
   end
 
   get '/play' do
     @game = games[:game]
+    @game.play(@game.current_player.move(@game)) if @game.current_player.respond_to?(:move)
     flash.now[:notice] = "Winner: #{@game.winner.symbol}" if @game.winner
     flash.now[:notice] = "It's a tie!" if @game.result == 'tie'
     flash.now[:notice] = "#{@game.current_player.symbol} to play" unless @game.over?
@@ -44,6 +47,10 @@ class NoughtsAndCrosses < Sinatra::Base
     @game = games[:game]
     location =  params[:location]
     @game.play(location.to_i)
+    if @game.current_player.respond_to? :move
+      computer_move = @game.current_player.move(@game)
+      @game.play(computer_move)
+    end
     redirect('/play')
   end
 
