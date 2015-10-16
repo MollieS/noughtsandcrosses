@@ -3,13 +3,12 @@ require 'player'
 require 'board'
 
 describe Game do
-  let(:player) { instance_double Player, symbol: "X" }
-  let(:opponent) { instance_double Player, symbol: "O" }
+  let(:player) { instance_double Player, symbol: 'X' }
+  let(:opponent) { instance_double Player, symbol: 'O' }
   let(:board) { Board.new }
   let(:game) { Game.new(player, opponent, board) }
 
   context 'setup' do
-
     it 'can set who goes first' do
       game.first_player = player
       expect(game.current_player).to eq player
@@ -20,27 +19,29 @@ describe Game do
     end
   end
 
-  context 'playing' do
-    it 'places a mark on the board' do
+  context 'when playing' do
+    before(:each) do
       game.first_player = player
+    end
+
+    it 'places a mark on the board' do
       game.play(1)
-      expect(board.grid[0]).to eq "X"
+      expect(board.grid[0]).to eq 'X'
     end
 
     it 'switches turns' do
-      game.first_player = player
       game.play(1)
-      expect(game.current_player.symbol).to eq "O"
+      expect(game.current_player.symbol).to eq 'O'
     end
 
     it 'knows when the game is tied' do
       tie_game
-      expect(game.result).to eq "tie"
+      expect(game.result).to eq 'tie'
     end
 
     it 'knows when the game is won' do
       won_game
-      expect(game.result).to eq "won"
+      expect(game.result).to eq 'won'
     end
 
     it 'knows when the game is over' do
@@ -54,8 +55,25 @@ describe Game do
     end
   end
 
+  context 'playing again' do
+    before(:each) do
+      game.first_player = player
+    end
+
+    it 'starts a new game' do
+      won_game
+      game.reset
+      expect(game).not_to be_over
+    end
+
+    it 'resets the first player' do
+      won_game
+      game.reset
+      expect(game.current_player).to eq player
+    end
+  end
+
   def tie_game
-    game.first_player = player
     game.play(1)
     game.play(2)
     game.play(3)
@@ -68,7 +86,6 @@ describe Game do
   end
 
   def won_game
-    game.first_player = player
     game.play(1)
     game.play(4)
     game.play(2)

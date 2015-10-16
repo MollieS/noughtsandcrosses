@@ -163,6 +163,11 @@ Then /^(?:|I )should see \/([^\/]*)\/(?: within "([^\"]*)")?$/ do |regexp, selec
   end
 end
 
+Then(/^I should see "([^"]*)" in the bottom left corner$/) do |mark|
+  tile = find('td.bottom-left-corner').value
+  tile == mark
+end
+
 Then /^(?:|I )should not see "([^\"]*)"(?: within "([^\"]*)")?$/ do |text, selector|
   with_scope(selector) do
     if page.respond_to? :should

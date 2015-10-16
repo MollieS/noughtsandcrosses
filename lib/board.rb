@@ -5,17 +5,18 @@ class Board
   def initialize
     @grid = (1..9).to_a
   end
+
   def place_mark(location, symbol)
-    return false unless valid_move(location)
+    return false unless valid_move?(location)
     @grid[location - 1] = symbol
   end
 
-  def valid_move(location)
+  def valid_move?(location)
     !taken?(@grid[location - 1]) && location < 10
   end
 
   def tie?
-    full? && !won_by?("X") && !won_by?("O")
+    full? && !won_by?('X') && !won_by?('O')
   end
 
   def won_by?(symbol)
@@ -62,7 +63,7 @@ class Board
   end
 
   def taken?(tile)
-    tile == "X" || tile == "O"
+    tile == 'X' || tile == 'O'
   end
 
   def left_diag

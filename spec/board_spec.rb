@@ -1,7 +1,6 @@
 require 'board'
 
 describe Board do
-
   context 'positions' do
     it 'shows the rows' do
       expect(subject.rows).to eq([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
@@ -26,8 +25,8 @@ describe Board do
 
   context 'playing' do
     it 'puts a mark on the board' do
-      subject.place_mark(1, "X")
-      expect(subject.grid[0]).to eq "X"
+      subject.place_mark(1, 'X')
+      expect(subject.grid[0]).to eq 'X'
     end
 
     it 'initializes with an empty grid' do
@@ -40,29 +39,29 @@ describe Board do
     end
 
     it 'empties the tile' do
-      subject.place_mark(5, "X")
+      subject.place_mark(5, 'X')
       subject.clear_space(5)
       expect(subject).to be_clear
     end
 
     it 'returns false for a taken space' do
-      subject.place_mark(5, "X")
-      expect(subject.place_mark(5, "O")).to be false
+      subject.place_mark(5, 'X')
+      expect(subject.place_mark(5, 'O')).to be false
     end
 
     it 'returns false for a move out of bounds' do
-      expect(subject.place_mark(10, "X")).to be false
+      expect(subject.place_mark(10, 'X')).to be false
     end
   end
 
   def won_game
-    subject.place_mark(1, "X")
-    subject.place_mark(2, "O")
-    subject.place_mark(3, "X")
-    subject.place_mark(4, "O")
-    subject.place_mark(5, "X")
-    subject.place_mark(6, "O")
-    subject.place_mark(7, "X")
-    subject.place_mark(8, "O")
+    subject.place_mark(1, 'X')
+    subject.place_mark(2, 'O')
+    subject.place_mark(3, 'X')
+    subject.place_mark(4, 'O')
+    subject.place_mark(5, 'X')
+    subject.place_mark(6, 'O')
+    subject.place_mark(7, 'X')
+    subject.place_mark(8, 'O')
   end
 end

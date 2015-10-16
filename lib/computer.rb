@@ -17,7 +17,7 @@ class Computer
     game.board.available_spaces.each do |m|
       game.play(m)
       scores[m] = best_space(game, depth += 1, {})
-      clear_space(game, m)
+      clear_tile(game, m)
     end
     return best_move(scores) if depth == game.board.available_spaces.length
     game.current_player.symbol == @symbol ? best_score(scores) : alternate_score(scores)
@@ -29,7 +29,7 @@ class Computer
     return 0 if board.tie?
   end
 
-  def clear_space(game, move)
+  def clear_tile(game, move)
     game.board.clear_space(move)
     game.switch_turn
   end

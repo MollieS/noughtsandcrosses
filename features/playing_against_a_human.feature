@@ -8,7 +8,7 @@ Feature: Playing against a human
     When I press "1"
     Then I should see "X" in the top left corner 
 
-  Scenario: winning a game against a human
+  Scenario: winning a game
     Given I have set up a game
     And I press "3"
     And my opponent presses "5"
@@ -31,3 +31,13 @@ Feature: Playing against a human
     And my opponent presses "6"
     And I press "4"
     Then I should see "It's a tie!"
+
+  Scenario: when a game is over
+    Given I have set up a game
+    And I press "1"
+    And my opponent presses "4"
+    And I press "2"
+    And my opponent presses "5"
+    And I press "3"
+    When my opponent presses "9"
+    Then I should see "9" in the bottom left corner

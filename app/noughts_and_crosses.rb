@@ -20,23 +20,25 @@ class NoughtsAndCrosses < Sinatra::Base
   post '/game/new' do
     if params[:players] == 'two_humans'
       player = Player.new(params[:symbol])
-      params[:symbol] == "X" ? opponent = Player.new("O") : opponent = Player.new("X")
+      params[:symbol] == 'X' ? opponent = Player.new('O') : opponent = Player.new('X')
     elsif params[:players] == 'on'
-      player = Player.new(params[:symbol]) 
-      params[:symbol] == "X" ? opponent = Computer.new("O") : opponent = Computer.new("X")
+      player = Player.new(params[:symbol])
+      params[:symbol] == 'X' ? opponent = Computer.new('O') : opponent = Computer.new('X')
     else
       player = Computer.new('X')
       opponent = Computer.new('O')
     end
-      game = Game.new(player, opponent, Board.new)
-      params[:first_player] == 'player1' ? game.first_player = player : game.first_player = opponent
-      games[:game] = game
+    game = Game.new(player, opponent, Board.new)
+    params[:first_player] == 'player1' ? game.first_player = player : game.first_player = opponent
+    games[:game] = game
     redirect('/play')
   end
 
   get '/play' do
     @game = games[:game]
-    @game.play(@game.current_player.move(@game)) if @game.current_player.respond_to?(:move)
+    until !@game.current_player.respond_to?(:move) || @game.over?
+      @game.play(@game.current_player.move(@game))
+    end
     flash.now[:notice] = "Winner: #{@game.winner.symbol}" if @game.winner
     flash.now[:notice] = "It's a tie!" if @game.result == 'tie'
     flash.now[:notice] = "#{@game.current_player.symbol} to play" unless @game.over?
@@ -44,17 +46,20 @@ class NoughtsAndCrosses < Sinatra::Base
   end
 
   post '/board/update' do
-    @game = games[:game]
+    game = games[:game]
     location =  params[:location]
-    @game.play(location.to_i)
-    if @game.current_player.respond_to? :move
-      computer_move = @game.current_player.move(@game)
-      @game.play(computer_move)
+    game.play(location.to_i)
+    if game.current_player.respond_to? :move
+      computer_move = game.current_player.move(game)
+      game.play(computer_move)
     end
     redirect('/play')
   end
 
   post '/play/new' do
+    game = games[:game]
+    game.reset
+    redirect('/play')
   end
 
   # start the server if ruby file executed directly

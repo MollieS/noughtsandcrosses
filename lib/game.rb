@@ -7,7 +7,7 @@ class Game
     @opponent = opponent
   end
 
-  def first_player=player
+  def first_player=(player)
     @first_player = player
     set_first_move
   end
@@ -31,7 +31,7 @@ class Game
 
   def result
     return 'tie' if @board.tie?
-    return 'won' if @board.won_by?("X") || @board.won_by?("O")
+    return 'won' if @board.won_by?('X') || @board.won_by?('O')
   end
 
   def winner
@@ -40,5 +40,10 @@ class Game
 
   def over?
     result != nil
+  end
+
+  def reset
+    @board.grid = (1..9).to_a
+    @current_player = @first_player
   end
 end
